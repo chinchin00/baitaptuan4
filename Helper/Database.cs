@@ -14,73 +14,34 @@ namespace ProjectMVVM_FlowerOnline.Helper
 
         public Database()
         {
-            try
-            {
-                _database = new SQLiteAsyncConnection(folder);
-                _database.CreateTableAsync<Hoa>().Wait();
+            _database = new SQLiteAsyncConnection(folder);
+                //_database.CreateTableAsync<Hoa>().Wait();
                 _database.CreateTableAsync<LoaiHoa>().Wait();
-            }
-            catch (Exception)
-            {
-                //Console.WriteLine("Exception caught!");
-            }
         }
 
         public Task<List<LoaiHoa>> GetLoaiHoa()
         {
-            try
-            {
-                return _database.Table<LoaiHoa>().ToListAsync();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            return _database.Table<LoaiHoa>().ToListAsync();
         }
 
         public Task<List<LoaiHoa>> GetLoaiHoa(int maLoai)
         {
-            try
-            {
-                return _database.Table<LoaiHoa>().Where(i => i.MaLoai == maLoai).ToListAsync();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            return _database.Table<LoaiHoa>().Where(i => i.MaLoai == maLoai).ToListAsync();
         }
 
         public Task<int> SaveLoaiHoa(LoaiHoa temp)
         {
-            try
-            {
-                if (temp.MaLoai != 0)
+            if (temp.MaLoai != 0)
                     return _database.UpdateAsync(temp);
                 else
                     return _database.InsertAsync(temp);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
         }
 
         public Task<int> DeleteLoaiHoa(LoaiHoa temp)
         {
-            try
-            {
-                return _database.Table<LoaiHoa>().DeleteAsync(i => i.MaLoai == temp.MaLoai);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            return _database.Table<LoaiHoa>().DeleteAsync(i => i.MaLoai == temp.MaLoai);
         }
-
+        /*
         public Task<List<Hoa>> GetHoa()
         {
             try
@@ -148,6 +109,6 @@ namespace ProjectMVVM_FlowerOnline.Helper
 
                 throw;
             }
-        }
+        }*/
     }
 }

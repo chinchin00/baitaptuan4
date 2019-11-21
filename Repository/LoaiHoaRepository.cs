@@ -10,7 +10,7 @@ namespace ProjectMVVM_FlowerOnline.Repository
 {
     class LoaiHoaRepository : ILoaiHoaRepository
     {
-        Database db;
+        public Database db;
         public LoaiHoaRepository()
         {
             db = new Database();
